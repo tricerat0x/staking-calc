@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f7f6;
+    }
+    .navbar{
+     background-color: #004445;
+    }
+    
+    .flatpickr-calendar {
+        background: #004445; 
+        color: #ffffff; 
+        border-radius: 4px; 
+    }
+  
+    .flatpickr-day {
+        border-radius: 50%; 
+        color: #ffffff;
+    }
+  
+    .flatpickr-day:hover,
+    .flatpickr-day:focus,
+    .flatpickr-day.today {
+        background: #02675b; 
+        color: #ffffff; 
+    }
+  
+    .flatpickr-weekday {
+        background: #003833;
+        color: #a0ecff; 
+    }
+  
+    .flatpickr-current-month {
+        font-size: 1rem;
+        color: #a0ecff; 
+    }
+  
+    .flatpickr-weekdays {
+        background: #003833; 
+    }
+  
+    .flatpickr-weekdaycontainer {
+        color: #a0ecff; 
+    }
+  
+    .flatpickr-prev-month,
+    .flatpickr-next-month {
+        color: #ffffff;
+    }
+  
+    .flatpickr-day.selected,
+    .flatpickr-day.selected:focus,
+    .flatpickr-day.selected:hover {
+        background-color: #028482; 
+        color: #ffffff; 
+    }
+
+    .modal-content {
+    background-color: #f8f9fa; 
+    border-radius: 8px; 
+}
+.modal-header, .modal-footer {
+    border-bottom: 1px solid #dee2e6; 
+    background-color: #e9ecef; 
+}
+ .modal-body {
+    padding: 20px; 
+}
+
+  </style>  
+</head>
+  <body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                  <li class="nav-item">
+                    <a id="logout" class="nav-link btn btn-secondary" href="/logout" style="color: #ffffff;">Logout</a>
+                  </li>
+                  <li class="nav-item">
+                    <a id="log-in" class="nav-link btn btn-secondary" href="/auth/google" style="color: #ffffff;">Log In</a>
+                  </li>
+                </ul>
+              </div>
+        </div>
+      </nav>
+    <div class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Welcome!</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body mx-auto">
+                <a href="/auth/google" class="btn btn-primary"  style="background-color: #02675b;">LOG IN</a>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>

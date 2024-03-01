@@ -1,0 +1,117 @@
+<%- include('partials/header') %>
+<div class="d-flex justify-content-center">
+  <h1 class="py-3">Hedged Staking Returns Calculator</h1>
+</div>
+<div id="inputForm" class="mx-auto">
+<form action="/" method="POST"> 
+  <div class="d-flex justify-content-center">
+  <select class="my-3 mx-2 p-1" name="network" id="network">
+    <option value="" selected disabled>Choose Network:</option>
+    <option value="eth">Ethereum</option>
+  </select>
+</div>
+  <div class="d-flex my-3 justify-content-center">
+  <input type="date" class="datepicker mx-3 px-2" id="startDate" name="startDate" placeholder="Select start date" min="2022-10-11" max="2023-02-23">
+  <input type="date" class="datepicker mx-3 px-2" id="endDate" name="endDate" placeholder="Select end date" min="2022-10-11" max="2024-02-23">
+  </div>
+  <div class="d-flex justify-content-center">
+  <input class="mx-2 px-3" type="radio" name="isHedged" value="true"> Hedged
+<input class="mx-2 px-3" type="radio" name="isHedged" value="false"> Unhedged
+</div>
+<div class="d-flex my-3">
+  <button id="submitButton" type="submit" class="btn btn-dark mx-auto">Submit</button>
+</div>
+</form>
+</div>
+<div class="d-flex my-3 justify-content-center">
+
+<% if (results) { %>
+  <h2>Total Returns: <%= results.toFixed(2) + '%' %></h2>
+  </div>
+  <div class="mx-auto" style="width: 1200px;">
+    <canvas id="myChart"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('myChart');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: <%- JSON.stringify(dataArray.map(data => data.date)) %>,
+        datasets: [
+          {
+            label: 'Spot Price',
+            data: <%- JSON.stringify(dataArray.map(data => data.price)) %>,
+            borderWidth: 2,
+            backgroundColor: 'rgba(0, 123, 255, 0.2)',
+            borderColor: '#007bff',
+            pointBackgroundColor: '#ffffff',
+            pointBorderColor: '#007bff',
+            pointHoverBackgroundColor: '#007bff',
+            pointHoverBorderColor: '#ffffff',
+            fill: false,
+            yAxisID: 'y-axis-price', 
+          },
+          {
+            label: 'Staking APR',
+            data: <%- JSON.stringify(dataArray.map(data => data.stakingApr)) %>,
+            borderWidth: 2,
+            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+            borderColor: '#ff9f40',
+            pointBackgroundColor: '#ffffff',
+            pointBorderColor: '#ff9f40',
+            pointHoverBackgroundColor: '#ff9f40',
+            pointHoverBorderColor: '#ffffff',
+            fill: false,
+            yAxisID: 'y-axis-apr', 
+          }
+        ]
+      },
+      options: {
+        scales: {
+          'y-axis-price': {
+            type: 'linear',
+            display: true,
+            position: 'left',
+            id: 'y-axis-price',
+            grid: {
+              drawOnChartArea: true, 
+            },
+          },
+          'y-axis-apr': {
+            type: 'linear',
+            display: true,
+            position: 'right',
+            id: 'y-axis-apr',
+            grid: {
+              drawOnChartArea: false, 
+            },
+            ticks: {
+              callback: function(value, index, values) {
+                return value.toFixed(1) + '%'; 
+              }
+            }
+          }
+        },
+        legend: {
+          labels: {
+            fontColor: '#004445', 
+          }
+        }
+      }
+    });
+  </script>
+  
+  
+  
+<% } else { %>
+  <p>Select performance period.</p>
+<% } %>
+<script>
+  flatpickr(".datepicker", {
+      dateFormat: "Y-m-d",
+  });
+  </script>
+  <%- include('partials/footer') %>
+  

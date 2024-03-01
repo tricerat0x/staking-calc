@@ -1,0 +1,18 @@
+
+<script>
+    var isUserAuthenticated = <%- isUserAuthenticated %>;
+
+    $(document).ready(function() {
+        if (!isUserAuthenticated) {
+            $('.modal').modal('show'); 
+            $('#log-in').show(); 
+            $('#logout').hide(); 
+        } else {
+            $('.modal').modal('hide'); 
+            $('#log-in').hide(); 
+            $('#logout').show(); 
+        }
+    });
+</script>
+</body>
+</html>
